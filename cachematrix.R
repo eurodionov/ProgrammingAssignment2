@@ -2,7 +2,7 @@
 ## Caching the inverse matrix
 
 ## This functions implements cached representation of a square invertible matrix. 
-## It receives a square matrix as a paramater.
+## It receives a square invertable matrix as a paramater.
 makeCacheMatrix <- function(x = matrix()) {
         inverse_matrix <- NULL
         set <- function(y) {
@@ -12,9 +12,12 @@ makeCacheMatrix <- function(x = matrix()) {
         get <- function() x
         setinverse <- function(inverse) inverse_matrix <<- inverse
         getinverse <- function() inverse_matrix
-        list(set = set, get = get,
+        list(
+             set = set,
+             get = get,
              setinverse = setinverse,
-             getinverse = getinverse)
+             getinverse = getinverse
+             )
 }
 
 ## This routine computes the inverse of a matrix with caching the result. It takes as a parameter 
@@ -27,6 +30,7 @@ cacheSolve <- function(x, ...) {
                 message("getting cached data")
                 return(inverse)
         }
+        # If we are computing the inverse of the matrix for the first time then:
         # get the real matrix
         data <- x$get()
         # compute inverse by calling solve() routine
